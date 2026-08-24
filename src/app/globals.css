@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F4F0EA;
+  --color-paper: #FFFDF9;
+  --color-ink: #171717;
+  --color-terracotta: #E4572E;
+  --color-mustard: #E8A93B;
+  --color-moss: #315C4B;
+  --color-dusk-blue: #34455C;
+  --color-sand: #E8DED3;
+  --color-line: #D7CEC5;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Tactile Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  background: transparent url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F1E6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8CBB2;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C7511F;
+}
+
+/* Stamp border styling */
+.stamp-border {
+  border: 2px dashed #D8CBB2;
+  border-radius: 9999px;
+}
+
+/* Polaroid frame styling */
+.polaroid-frame {
+  background: #FFFBF3;
+  padding: 12px 12px 28px 12px;
+  border: 1px solid rgba(216, 203, 178, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(36, 31, 28, 0.12);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.polaroid-frame:hover {
+  transform: scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 20px 35px -5px rgba(36, 31, 28, 0.22);
+  z-index: 20;
+}

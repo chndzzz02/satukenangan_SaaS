@@ -1,0 +1,14 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(130,70)">
+    <g fill="none" stroke="#2B2A28" stroke-width="9" stroke-linejoin="round">
+      <path d="M0 36 L0 0 L36 0"/>
+      <path d="M104 0 L140 0 L140 36"/>
+      <path d="M0 104 L0 140 L36 140"/>
+    </g>
+    <rect x="104" y="104" width="36" height="36" rx="9" fill="#B5502E"/>
+  </g>
+  <text x="200" y="278" text-anchor="middle" font-family="'Century Gothic','Futura','Trebuchet MS',sans-serif" font-size="34" letter-spacing="1">
+    <tspan fill="#8A8580" font-weight="400">satu </tspan><tspan fill="#2B2A28" font-weight="700">kenangan</tspan>
+  </text>
+  <circle cx="200" cy="308" r="5" fill="#B5502E"/>
+</svg>
