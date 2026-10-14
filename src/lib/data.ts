@@ -103,6 +103,37 @@ export async function updatePaymentStatus(slug: string, status: "paid" | "unpaid
   const rows = await request<any[]>(`events?slug=eq.${encodeURIComponent(slug)}`, { method: "PATCH", body: JSON.stringify({ payment_status: status }) });
   return rows[0] ? fromRow(rows[0]) : undefined;
 }
+
+export async function updateGuestLimit(slug: string, newGuestLimit: number, newPrice: number) {
+  if (!isSupabaseConfigured) {
+    const event = store.getEvent(slug);
+    if (event) {
+      event.guestLimit = newGuestLimit;
+      event.price = newPrice;
+    }
+    return event;
+  }
+  const rows = await request<any[]>(`events?slug=eq.${encodeURIComponent(slug)}`, {
+    method: "PATCH",
+    body: JSON.stringify({ guest_limit: newGuestLimit, price: newPrice }),
+  });
+  return rows[0] ? fromRow(rows[0]) : undefined;
+}
+
+export async function updateEventStatus(slug: string, status: "active" | "draft" | "completed" | "paused") {
+  if (!isSupabaseConfigured) {
+    const event = store.getEvent(slug);
+    if (event) {
+      event.status = status as any;
+    }
+    return event;
+  }
+  const rows = await request<any[]>(`events?slug=eq.${encodeURIComponent(slug)}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status }),
+  });
+  return rows[0] ? fromRow(rows[0]) : undefined;
+}
 export async function getEvents() {
   if (!isSupabaseConfigured) return store.getAllEvents();
   const rows = await request<any[]>("events?select=*&order=created_at.desc");

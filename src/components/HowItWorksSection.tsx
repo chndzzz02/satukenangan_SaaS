@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,7 +30,7 @@ const STEPS: Step[] = [
     frameCode: "01 / STEP",
     mockupState: {
       title: "Pernikahan Nisa & Dimas",
-      description: "Preset Roll: Portra 400 • 24 Foto/Tamu",
+      description: "Preset Roll: Portra 400 â€¢ 24 Foto/Tamu",
       images: [
         "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80",
       ],
@@ -61,7 +61,7 @@ const STEPS: Step[] = [
     icon: Eye,
     frameCode: "03 / STEP",
     mockupState: {
-      title: "Roll Selesai Dicuci! 🎉",
+      title: "Roll Selesai Dicuci! ðŸŽ‰",
       description: "142 Foto Berhasil Terkumpul",
       images: [
         "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80",
@@ -181,7 +181,7 @@ export default function HowItWorksSection() {
                       <div>
                         <div className="flex items-center justify-between border-b border-line pb-3 mb-4">
                           <span className="font-display font-bold text-sm text-ink flex items-center gap-1.5">
-                            ✦ satukenangan
+                            âœ¦ satukenangan
                           </span>
                           <span className="font-mono text-[10px] bg-terracotta text-paper px-2 py-0.5 rounded-full font-bold">
                             {currentStep.mockupState.badge}
@@ -248,7 +248,7 @@ export default function HowItWorksSection() {
 
                       {/* Screen Action Button */}
                       <div className="pt-4 border-t border-line">
-                        <button className="w-full py-2.5 bg-terracotta text-paper rounded-xl font-ui text-xs font-bold shadow flex items-center justify-center gap-2">
+                        <button type="button" onClick={() => { window.location.href = "/create"; }} className="w-full py-2.5 bg-terracotta text-paper rounded-xl font-ui text-xs font-bold shadow flex items-center justify-center gap-2">
                           <Camera className="w-3.5 h-3.5" />
                           <span>
                             {activeStep === 1
@@ -270,3 +270,4 @@ export default function HowItWorksSection() {
     </section>
   );
 }
+

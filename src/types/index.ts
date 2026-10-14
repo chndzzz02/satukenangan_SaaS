@@ -34,7 +34,7 @@ export interface SatukenanganEvent {
   revealedAt?: string;
   guestLimit: number; // 5, 50, 100, 200, 9999
   photoLimitPerGuest: number; // e.g. 24
-  status: "active" | "draft" | "completed";
+  status: "active" | "draft" | "completed" | "paused";
   paymentStatus: "unpaid" | "paid" | "free";
   price: number;
   qrCodeUrl: string;
@@ -79,4 +79,19 @@ export interface CreateEventInput {
 export interface PaymentSnapResponse {
   snapToken: string;
   redirectUrl: string;
+}
+
+export type TransactionStatus = "unpaid" | "pending" | "paid" | "failed" | "expired";
+
+export interface Transaction {
+  id: string;
+  eventId: string;
+  orderId: string;
+  grossAmount: number;
+  paymentType?: string;
+  transactionStatus: TransactionStatus;
+  snapToken?: string;
+  snapRedirectUrl?: string;
+  createdAt: string;
+  updatedAt: string;
 }

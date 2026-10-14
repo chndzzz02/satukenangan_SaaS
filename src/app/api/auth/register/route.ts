@@ -1,7 +1,17 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import rateLimiter, { getClientIp } from "@/lib/rate-limiter";
 
 export async function POST(req: NextRequest) {
   try {
+    const clientIp = getClientIp(req);
+    const rateLimit = rateLimiter.check(`register:${clientIp}`, 5, 60000);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { success: false, error: "Too many registration attempts. Please try again in a minute." },
+        { status: 429 }
+      );
+    }
+
     const { email, password } = await req.json();
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;

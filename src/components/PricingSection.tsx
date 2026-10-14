@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import ShutterButton from "./ShutterButton";
@@ -69,7 +69,7 @@ const TIERS: GuestTier[] = [
     ],
   },
   {
-    guests: "Unlimited (∞)",
+    guests: "Unlimited (âˆž)",
     guestNum: 999,
     price: 799000,
     isFree: false,
@@ -167,7 +167,7 @@ export default function PricingSection() {
                 </span>
                 {currentTier.isFree && (
                   <span className="bg-mustard text-ink font-mono font-bold text-xs px-3 py-1 rounded-full border border-ink/20 shadow-sm animate-bounce">
-                    ★ GRATIS UJI COBA
+                    â˜… GRATIS UJI COBA
                   </span>
                 )}
               </div>
@@ -185,6 +185,7 @@ export default function PricingSection() {
             <ShutterButton
               label={currentTier.isFree ? "Mulai Gratis Now" : "Pilih Paket Ini"}
               size="large"
+              onClick={() => { window.location.href = "/create"; }}
             />
           </div>
         </div>
@@ -200,7 +201,7 @@ export default function PricingSection() {
             {currentTier.features.map((feat, idx) => (
               <div key={idx} className="flex items-center gap-2.5 text-sm text-ink/80 font-ui">
                 <div className="w-4 h-4 rounded-full bg-moss/20 text-moss flex items-center justify-center text-[10px] shrink-0">
-                  ✓
+                  âœ“
                 </div>
                 <span>{feat}</span>
               </div>
@@ -211,3 +212,5 @@ export default function PricingSection() {
     </section>
   );
 }
+
+

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Sparkles, Sliders, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { Check, Sparkles } from "lucide-react";
 
 interface Preset {
   id: string;
@@ -10,7 +11,6 @@ interface Preset {
   code: string;
   tagline: string;
   gradient: string;
-  filterClass: string;
   styleObj: React.CSSProperties;
   sampleImg: string;
   toneDesc: string;
@@ -23,7 +23,6 @@ const PRESETS: Preset[] = [
     code: "ISO 400 • COLOR",
     tagline: "Warm Skin Tones & Pastel Soft",
     gradient: "from-amber-200 via-orange-300 to-rose-200",
-    filterClass: "sepia-[0.25] contrast-[1.05] saturate-[1.15] brightness-[1.02]",
     styleObj: {
       filter: "sepia(0.2) contrast(1.08) saturate(1.2) hue-rotate(-5deg)",
     },
@@ -36,7 +35,6 @@ const PRESETS: Preset[] = [
     code: "ISO 800 • TUNGSTEN",
     tagline: "Night Glow & Halation Red",
     gradient: "from-blue-600 via-indigo-500 to-red-500",
-    filterClass: "contrast-[1.2] hue-rotate-[10deg] saturate-[1.3]",
     styleObj: {
       filter: "contrast(1.2) hue-rotate(15deg) saturate(1.3) brightness(0.95)",
     },
@@ -49,7 +47,6 @@ const PRESETS: Preset[] = [
     code: "ISO 800 • VINTAGE",
     tagline: "Nostalgic Yellow & Grainy",
     gradient: "from-yellow-400 via-amber-500 to-red-400",
-    filterClass: "sepia-[0.35] contrast-[1.1] saturate-[1.2]",
     styleObj: {
       filter: "sepia(0.35) contrast(1.15) saturate(1.25) brightness(1.05)",
     },
@@ -62,7 +59,6 @@ const PRESETS: Preset[] = [
     code: "ISO 400 • FUJI TONE",
     tagline: "Cool Shadows & Lush Greens",
     gradient: "from-emerald-400 via-teal-500 to-amber-300",
-    filterClass: "hue-rotate-[-10deg] contrast-[1.1] saturate-[1.15]",
     styleObj: {
       filter: "hue-rotate(-12deg) contrast(1.1) saturate(1.15) brightness(1.02)",
     },
@@ -75,7 +71,6 @@ const PRESETS: Preset[] = [
     code: "ISO 400 • B&W",
     tagline: "Classic Black & White",
     gradient: "from-slate-700 via-gray-500 to-gray-200",
-    filterClass: "grayscale contrast-[1.25]",
     styleObj: {
       filter: "grayscale(100%) contrast(1.3) brightness(1.05)",
     },
@@ -88,7 +83,6 @@ const PRESETS: Preset[] = [
     code: "ISO 100 • HIGH SAT",
     tagline: "Vibrant Color & Rich Contrast",
     gradient: "from-orange-500 via-rose-600 to-yellow-300",
-    filterClass: "saturate-[1.6] contrast-[1.2]",
     styleObj: {
       filter: "saturate(1.6) contrast(1.2) brightness(1.02)",
     },
@@ -105,8 +99,8 @@ export default function FilmPresetsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs text-moss uppercase tracking-widest bg-sand px-3 py-1 rounded-full">
-            KATALOG FILM ROLL
+          <span className="font-mono text-xs text-moss uppercase tracking-widest bg-sand/80 px-3.5 py-1 rounded-full font-bold">
+            KATALOG FILM ROLL ANALOG
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-ink mt-3 mb-4">
             6 Pilihan Emulasi <span className="text-terracotta">Film Analog</span>
@@ -120,16 +114,18 @@ export default function FilmPresetsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Big Live Preview Window (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="polaroid-frame w-full max-w-sm bg-cream p-4 border border-line shadow-2xl relative">
+            <div className="polaroid-frame w-full max-w-sm bg-cream p-4 border border-line shadow-2xl relative rounded-2xl">
               <div className="flex items-center justify-between font-mono text-xs text-ink/80 mb-2">
-                <span className="font-bold text-terracotta">PREVIEW LIVE</span>
-                <span className="bg-mustard/30 text-ink px-2 py-0.5 rounded font-mono font-bold">
+                <span className="font-bold text-terracotta flex items-center gap-1">
+                  <Sparkles size={14} /> PREVIEW LIVE
+                </span>
+                <span className="bg-amber-100 border border-amber-300 text-amber-900 px-2 py-0.5 rounded font-mono font-bold text-[10px]">
                   {activePreset.code}
                 </span>
               </div>
 
               {/* Dynamic Filter Applied Photo */}
-              <div className="relative aspect-[4/3] w-full rounded overflow-hidden bg-ink shadow-inner">
+              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-ink shadow-inner">
                 <Image
                   src={activePreset.sampleImg}
                   alt={activePreset.name}
@@ -137,9 +133,8 @@ export default function FilmPresetsSection() {
                   style={activePreset.styleObj}
                   className="object-cover transition-all duration-500 ease-out"
                 />
-                {/* Vintage Date Stamp Overlay */}
-                <div className="absolute bottom-3 right-3 font-mono text-mustard text-xs font-bold tracking-widest drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                  &apos;26 08 20
+                <div className="absolute bottom-3 right-3 font-mono text-amber-300 text-xs font-bold tracking-widest drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                  &apos;26 08 24
                 </div>
               </div>
 
@@ -162,13 +157,14 @@ export default function FilmPresetsSection() {
             {PRESETS.map((preset) => {
               const isSelected = activePreset.id === preset.id;
               return (
-                <div
+                <motion.div
                   key={preset.id}
+                  whileHover={{ scale: 1.02 }}
                   onMouseEnter={() => setActivePreset(preset)}
                   onClick={() => setActivePreset(preset)}
-                  className={`p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                  className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer ${
                     isSelected
-                      ? "bg-cream border-terracotta shadow-md scale-[1.02]"
+                      ? "bg-cream border-terracotta shadow-md"
                       : "bg-paper hover:bg-cream/40 border-line"
                   }`}
                 >
@@ -190,11 +186,11 @@ export default function FilmPresetsSection() {
                       </p>
                     </div>
 
-                    <span className="font-mono text-[10px] px-2 py-1 bg-sand rounded text-ink/80 border border-line">
-                      HOVER PREVIEW
+                    <span className="font-mono text-[10px] px-2 py-1 bg-sand rounded-lg text-ink/80 border border-line font-bold">
+                      PREVIEW
                     </span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

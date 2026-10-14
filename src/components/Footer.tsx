@@ -41,24 +41,24 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-2 font-ui text-sm text-paper/80">
               <li>
-                <a href="#cara-kerja" className="hover:text-mustard transition-colors">
-                  Cara Kerja Scrollytelling
-                </a>
+                <Link href="/use-cases/wedding" className="hover:text-mustard transition-colors">
+                  Pernikahan & Wedding
+                </Link>
               </li>
               <li>
-                <a href="#preset-film" className="hover:text-mustard transition-colors">
-                  Katalog Preset Film Analog
-                </a>
+                <Link href="/use-cases/birthday" className="hover:text-mustard transition-colors">
+                  Pesta Ulang Tahun
+                </Link>
               </li>
               <li>
-                <a href="#testimoni" className="hover:text-mustard transition-colors">
-                  Galeri & Testimoni Host
-                </a>
+                <Link href="/use-cases/gathering" className="hover:text-mustard transition-colors">
+                  Gathering Kantor & Komunitas
+                </Link>
               </li>
               <li>
-                <a href="#harga" className="hover:text-mustard transition-colors">
-                  Kapasitas Guest & Pricing
-                </a>
+                <Link href="/use-cases/graduation" className="hover:text-mustard transition-colors">
+                  Wisuda & Kelulusan
+                </Link>
               </li>
               <li>
                 <a href="#faq" className="hover:text-mustard transition-colors">

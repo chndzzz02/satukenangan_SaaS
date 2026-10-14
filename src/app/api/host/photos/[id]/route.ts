@@ -1,13 +1,20 @@
-﻿import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import { deletePhoto, getEvent, togglePhotoVisibility } from "@/lib/data";
+import { getAuthenticatedUser } from "@/lib/supabase-server";
+import { isSupabaseConfigured } from "@/lib/supabase";
 
 async function authorize(req: NextRequest) {
-  const ownerId = cookies().get("satukenangan_user_id")?.value;
   const slug = new URL(req.url).searchParams.get("slug");
-  if (!ownerId || !slug) return false;
+  if (!slug) return false;
   const event = await getEvent(slug);
-  return Boolean(event && (!event.hostUserId || event.hostUserId === ownerId));
+  if (!event) return false;
+
+  if (isSupabaseConfigured) {
+    const user = await getAuthenticatedUser(req);
+    if (!user) return false;
+    return Boolean(!event.hostUserId || event.hostUserId === user.id);
+  }
+  return true;
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
